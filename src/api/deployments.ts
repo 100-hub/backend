@@ -3,6 +3,9 @@ import { Env } from "../types";
 
 const deployments = new Hono<Env>()
 
+// Must match the bucket's `expire-temp` lifecycle rule
+const TEMP_RETENTION_MS = 7 * 24 * 60 * 60 * 1000
+
 // Permanent builds, then temporary (manual) builds that the bucket's lifecycle rule deletes after 7 days
 const distributionPrefixes = (appName: string) => [
   `distributions/${appName}/`,
@@ -13,6 +16,9 @@ const formatDistribution = (object: R2Object, prefix: string) => ({
   id: object.key.slice(prefix.length).replace(/\.[^.]+$/, ''),
   name: object.customMetadata?.branch,
   last_modified: object.uploaded.toISOString(),
+  expires_at: prefix.startsWith('temp/')
+    ? new Date(object.uploaded.getTime() + TEMP_RETENTION_MS).toISOString()
+    : null,
 })
 
 deployments.get('/:app', async (c) => {
