@@ -1,6 +1,7 @@
 import { Hono } from "hono";
+import { Env } from "../types";
 
-const deployments = new Hono()
+const deployments = new Hono<Env>()
 
 deployments.get('/:app', (c) => {
   const appName = c.req.param('app')

@@ -1,13 +1,11 @@
 import { Hono } from "hono"
 import deployments from "./deployments"
-import { app_list } from "../app_list"
+import { Env } from "../types"
+import apps from "./apps"
 
-const api = new Hono()
-
-api.get('/apps', (c) => {
-  return c.json({ apps: app_list }, 200)
-})
+const api = new Hono<Env>()
 
 api.route('/deployments', deployments)
+api.route('/apps', apps)
 
 export default api

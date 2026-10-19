@@ -1,0 +1,8 @@
+[[d1_databases]]
+binding = "DB"
+"database_name": "hub",
+"database_id": "ce0f8103-d8b8-4e11-8d30-5ff9bfe7fae2"
+
+[[r2_buckets]]
+binding = "HUB_BUCKET"
+bucket_name = "hub"

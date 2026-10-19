@@ -1,10 +1,11 @@
 import { Hono } from 'hono'
 import api from './api'
+import { Env } from './types'
 
-const app = new Hono()
+const app = new Hono<Env>()
 
 app.get('/', (c) => {
-  return c.status(200)
+  return c.body(null, 200)
 })
 
 app.get('/health', (c) => {
