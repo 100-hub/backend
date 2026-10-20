@@ -11,10 +11,10 @@ apps.get('/', async (c) => {
   const formattedApps = results.map((app) => ({
     name: app.app_id,
     display_name: app.display_name,
-    icon: `${origin}/api/apps/${app.app_id}/icon`,
+    icon_url: `${origin}/api/apps/${app.app_id}/icon`,
   }))
   
-  return c.json({ apps: formattedApps }, 200)
+  return c.json(formattedApps, 200)
 })
 
 apps.get('/:appId/icon', async (c) => {

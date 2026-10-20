@@ -6,5 +6,6 @@ export interface Env extends HonoEnv {
   Bindings: {
     DB: D1Database
     HUB_BUCKET: R2Bucket
+    API_KEY: string
   }
 }
