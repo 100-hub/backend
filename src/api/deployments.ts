@@ -6,7 +6,7 @@ const deployments = new Hono<Env>()
 // Must match the bucket's `expire-temp` lifecycle rule
 const TEMP_RETENTION_MS = 24 * 60 * 60 * 1000
 
-// Permanent builds, then temporary (manual) builds that the bucket's lifecycle rule deletes after 7 days
+// Permanent builds, then temporary (manual) builds that the bucket's lifecycle rule deletes after 24 hours
 const distributionPrefixes = (appName: string) => [
   `distributions/${appName}/`,
   `temp/distributions/${appName}/`,
